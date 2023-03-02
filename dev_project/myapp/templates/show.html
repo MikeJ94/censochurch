@@ -1,0 +1,136 @@
+{% extends "./base.html" %}
+
+
+{% block title %}Listado de Adultos{% endblock title %}
+
+{% load static %}  
+  
+{% block content %}
+
+<div class="container-fluid" > 
+
+ <div class="col-md-12">
+        <br>
+        <br>
+        <br>
+        <br>
+        <h3>Listado de Adultos (Miembros)</h3>  
+        <br>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="table-responsive">
+        <table id="bootstrapdatatable" class="table table-sm table-hover table-striped table-bordered" width="100%">
+        <thead class="thead-dark">
+            <tr>  
+            
+          {% comment %}   <th></th> {% endcomment %}
+            <th>ID</th>
+            <th>Fecha de Registro</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Edad</th>
+            <th>Celular</th>
+            <th>Direccion</th>
+            <th>Genero</th>
+            <th>¿Miembro?</th>
+            <th>Fotografia</th> 
+            <th>Ver</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+            <th>¿Discipulado?</th>
+            <th>¿Bautizado?</th>
+            <th>Observacion</th>
+            <th>Estado</th>
+            <th>Rol Familiar</th>
+            <th>¿Hijos?</th>
+            <th>Ultima Modificacion</th>
+           
+        </tr>
+        </thead>
+        <tbody>
+      {% comment %}  {% for person in persons %} {% endcomment %}
+       {% for person in object_list %}
+
+            <tr>  
+           {% comment %}  <td></td>   {% endcomment %}
+            <td>{{ person.id }}</td>  
+            <td>{{ person.date_joined }}</td>
+            <td>{{ person.name }}</td>  
+            <td>{{ person.lastname }}</td>  
+            <td>{{ person.dni }}</td>  
+            <td>{{ person.date_birth }}</td>  
+            <td>{{ person.age }}</td> 
+            <td>{{ person.celular }}</td> 
+            <td>{{ person.address }}</td>
+            <td>{{ person.gender }}</td> 
+
+            <td>
+                {% if person.member %}
+                SI
+                {% else %}
+                NO
+                {% endif %}
+            </td> 
+
+            {% if person.image %}
+            <td><img src="{{ person.image.url }}" class="img-fluid"></td>
+            {% else %}
+            <td><img src="{% static 'img/avatar.png' %}" class="img-fluid"></td>
+            {% endif %}
+
+            <td><a href="{% url 'myapp:view-per' person.id %}" class="btn btn-primary">Ver</a></td>
+            <td><a href="{% url 'myapp:person_edit' person.id %}" class="btn btn-warning">Editar</a></td>
+            <td><a href="eliminarPersona/{{person.id}}" class="btnEliminacion btn btn-danger">Eliminar</a></td> 
+
+            <td>
+                {% if person.discipleship %}
+                SI
+                {% else %}
+                NO
+                {% endif %}
+            </td> 
+
+            <td>
+                {% if person.baptized %}
+                SI
+                {% else %}
+                NO
+                {% endif %}
+            </td> 
+            
+            <td>{{ person.observationbap }}</td> 
+
+            <td>{{ person.state }}</td>
+
+            <td>{{ person.familyrol }}</td> 
+
+            <td>
+                {% if person.childrenb %}
+                SI
+                {% else %}  
+                NO
+                {% endif %}
+            </td> 
+
+            <td>{{ person.date_updated }}</td>
+            
+             </tr>  
+        
+        {% endfor %} 
+
+        </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

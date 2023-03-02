@@ -1,0 +1,334 @@
+{% extends "./base.html" %}
+
+{% block title %}Agregar Nuevo Registro{% endblock title %}
+
+   
+{% block content %}
+
+<div class="col-md-12">    
+    <br>  
+    <br>  
+    <br>  
+
+    <div class="container">   
+            <br>  
+        <form action="/myapp/registrarPersona/" method="POST" enctype="multipart/form-data" class:"post-form">{% csrf_token %}
+                
+                    <div class="form-group row">  
+                        <label class="col-sm-0 col-form-label"></label>  
+                        <div class="col-sm-5">  
+                        <h3>Agregar Nuevo Registro</h3>  
+                        </div>  
+                    </div>  
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong class="text-dark">{{ message }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <div class="form-group row">  
+                        <label class="col-sm-2 col-form-label">Fecha de Registro:  
+                        <h6 id="current_date">  
+                            <script>
+                                date = new Date();
+                                year = date.getFullYear();
+                                month = date.getMonth() + 1;
+                                day = date.getDate();
+                                document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+                            </script>  
+                        </h6>  
+                    </label>
+                    </div>  
+
+                <div class="form-row">
+                        <div class="col">  
+                            <label for="validationCustom03" class="col-sm-0 col-form-label">Nombres:</label>  
+                            <input type="text" id="txtName" name="txtName" class="form-control" placeholder="Nombres"
+                                maxlength="50" required autofocus >
+                                <div class="invalid-feedback">
+                                    Please provide a valid name.
+                                  </div>
+                         </div>  
+                         
+
+                        <div class="col">
+                            <label class="col-sm-0 col-form-label">Apellidos:</label>  
+                            <input type="text" id="txtLastname" name="txtLastname" class="form-control" placeholder="Apellidos"
+                                maxlength="50" required>
+                        </div>
+                 </div> 
+                 <br> 
+
+                    <div class="form-row">
+                        <div class="col">  
+                            <label class="col-sm-0 col-form-label">DNI:</label>  
+                            <input type="text" id="txtDni" name="txtDni" class="form-control" placeholder="Sin guiones, Ni espacios"
+                             maxlength="13" required>
+                        </div>  
+
+                        <div class="col">
+                            <label class="col-sm-0 col-form-label">Celular:</label>  
+                            <input type="text" id="numCelular" name="numCelular" class="form-control" maxlength="8" placeholder="Solo Numeros"
+                             required>
+                        </div>
+                </div> 
+                <br> 
+
+                    <div class="form-row">
+                        <div class="form-group col-md-5">  
+                            <label class="col-sm-0 col-form-label">Fecha de Nacimiento:</label>  
+                            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" 
+                             min="1930-01-01" max="2030-12-31" required>
+                        </div>  
+
+                        <div class="form-group col-md-2" >
+                            <label class="col-sm-0 col-form-label">Edad Calculada:</label>
+                            <h3 id="edad"></h3>
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-0 col-form-label">Edad:</label>
+                            <input type="number" id="numEdad" name="numEdad" class="form-control" placeholder="Solo Numeros">
+                        </div>
+                    </div> 
+                    <br> 
+
+                <div class="form-group row">  
+                    <label class="col-sm-2 col-form-label">Direccion:</label>  
+                    <div class="col-sm-10">  
+                        <textarea id="textAddress" name="textAddress" class="form-control" maxlength="250" required> 
+                        </textarea>
+                    </div>  
+                </div> 
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">  
+                            <label class="col-sm-0 col-form-label">Genero:</label>  
+                            <select id="selectGender" name="selectGender" class="form-control" required>>
+                                <option selected>Elija una Opcion</option>
+                                <option value="MASCULINO">MASCULINO</option>
+                                <option value="FEMENINO">FEMENINO</option>
+                              </select>
+                        </div>
+                             
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-0 col-form-label">Miembro:</label>  
+                            <select id="selectMember" name="selectMember" class="form-control" required>>
+                                <option selected>Elija una Opcion</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+                              </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-0 col-form-label">Estado:</label>  
+                            <select id="selectState" name="selectState" class="form-control" required>>
+                                <option selected>Elija una Opcion</option>
+                                <option value="ACTIVO">ACTIVO</option>
+                                <option value="INACTIVO">INACTIVO</option>
+                              </select>
+                        </div>
+                </div> 
+                <br> 
+
+                <div class="form-group row">  
+                    <label class="col-sm-2 col-form-label">Foto:</label>  
+                    <div class="col-sm-10">  
+                        <input type="file" id="image" name="image" class="form-control" required>
+                    </div>  
+                </div> 
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">  
+                            <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                        </div>  
+                        <div class="form-group col-md-6">
+                            <button type="reset" class="btn btn-warning btn-block text-white">Reset</button>
+                        </div>
+                </div> 
+                <br> 
+        </form>
+    </div> 
+</div>  
+
+{% comment %} from tkinter import DISABLED
+from django.db import models
+from datetime import datetime
+import os
+from django.forms import model_to_dict
+
+
+def filepath(request, filename):
+    old_filename = filename
+    #timeNow = datetime.datetime.now().strftime('%Y%m%d%H:%M:%S')
+    timeNow = datetime.datetime.now('%Y-%m-%d')
+    filename = "%s%s" % (timeNow, old_filename)
+    return os.path.join('avatar/', filename)
+
+class Estado(models.Model):
+    name = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.name # Muestra como se vera el Listado en el Panel de Administracion
+    
+    class Meta:
+        verbose_name = 'Estado' # Da el Nombre en el Panel de Administracion
+        verbose_name_plural = 'Estados' # Da el Nombre en el Panel de Administracion
+        db_table = 'tblestado'
+        ordering = ['id']
+
+class Hijo(models.Model):
+    name = models.CharField(max_length=50)
+    age = models.PositiveIntegerField(default=0,verbose_name='Edad') # Para que no acepte Enteros Negati
+    baptized = models.BooleanField(verbose_name='¿Es Bautizado?')
+    observationbap = models.CharField(max_length=200, verbose_name='Observacion de Bautismo')
+    #----------------------------------------------------------------#
+    ANCIANOS = 'ANCIANOS'
+    CADETES = 'CADETES'
+    CUADRA_KIDS = 'CUADRA KIDS'
+    DANZA_Y_CORROS_PENIEL = 'DANZA Y CORROS PENIELL'
+    DIACONOS_Y_SERVIDORES = 'DIACONOS Y SERVIDORES'
+    INTERSECION = 'INTERSECION'
+    LIDER_DE_GRUPO_DE_VIDA = 'LIDER DE GRUPO DE VIDA'
+    MAESTROS_DE_DISCIPULADO_GENERAL_Y_MAYOR = 'MAESTROS DE DISCIPULADO GENERAL Y MAYOR'
+    MULTIMEDIA_Y_CAMARAS = 'MULTIMEDIA Y CAMARAS'
+    NO_PERTENEZCO_A_NINGUN_MINISTERIO = 'NO PERTENEZCO A NINGUN MINISTERIO'
+    PENIEL_WORSHIP = 'PENIEL WORSHIP'
+    PRE_ADOLESCENTES = 'PRE-ADOLESCENTES'
+    SUPERVISOR_DE_ZONA = 'SUPERVISOR DE ZONA'
+    GENDER_IN_CHOICES = [
+        (ANCIANOS, 'ANCIANOS'),
+        (CADETES, 'CADETES'),
+        (CUADRA_KIDS, 'CUADRA KIDS'),
+        (DANZA_Y_CORROS_PENIEL, 'DANZA Y CORROS_PENIEL'),
+        (DIACONOS_Y_SERVIDORES, 'DIACONOS Y SERVIDORES'),
+        (INTERSECION, 'INTERSECION'),
+        (LIDER_DE_GRUPO_DE_VIDA, 'LIDER DE GRUPO DE VIDA'),
+        (MAESTROS_DE_DISCIPULADO_GENERAL_Y_MAYOR, 'MAESTROS DE DISCIPULADO GENERAL Y MAYOR'),
+        (MULTIMEDIA_Y_CAMARAS, 'MULTIMEDIA Y CAMARAS'),
+        (NO_PERTENEZCO_A_NINGUN_MINISTERIO, 'NO PERTENEZCO A NINGUN MINISTERIO'),
+        (PENIEL_WORSHIP, 'PENIEL WORSHIP'),
+        (SUPERVISOR_DE_ZONA, 'SUPERVISOR DE ZONA'),
+    ]
+    ministry = models.CharField(max_length=50,choices=GENDER_IN_CHOICES,verbose_name='Ministerio')
+    #----------------------------------------------------------------#
+    date_updated = models.DateTimeField(auto_now = True) # Fecha y Hora / Se ira modificando
+   
+    
+
+    def __str__(self):
+        return self.name # Muestra como se vera el Listado en el Panel de Administracion
+    
+    class Meta:
+        verbose_name = 'Hijo' # Da el Nombre en el Panel de Administracion
+        verbose_name_plural = 'Hijos' # Da el Nombre en el Panel de Administracion
+        db_table = 'tblhijo'
+        ordering = ['id']
+
+# Create your models here.
+class Person(models.Model):
+    date_joined = models.DateField(default=datetime.now,verbose_name='Fecha de Registro') # Fecha
+    name = models.CharField(max_length=50, verbose_name='Nombres')
+    lastname = models.CharField(max_length=50, verbose_name='Apellidos')
+    dni = models.CharField(max_length=13,unique=True,verbose_name='# de Identidad') 
+    date_birth = models.DateField(default=datetime.now, verbose_name='Fecha de Nacimiento') # Fecha
+    age = models.PositiveIntegerField(default=0,verbose_name='Edad') # Para que no acepte Enteros Negativos
+    celular = models.PositiveIntegerField(default=0)
+    address = models.CharField(max_length=250, verbose_name='Direccion',null=True)
+    #----------------------------------------------------------------#
+    MASCULINO = 'MASCULINO'
+    FEMENINO = 'FEMENINO'
+    GENDER_IN_CHOICES = [
+        (MASCULINO, 'MASCULINO'),
+        (FEMENINO, 'FEMENINO'),
+    ]
+    gender = models.CharField(max_length=10,choices=GENDER_IN_CHOICES,verbose_name='Genero')
+    #----------------------------------------------------------------#
+    member = models.BooleanField(verbose_name='¿Es miembro?')
+    discipleship = models.BooleanField(verbose_name='¿Ha recibido Discipulado ICR?')
+    baptized = models.BooleanField(verbose_name='¿Es Bautizado?')
+    observationbap = models.CharField(max_length=200, verbose_name='Observacion de Bautismo')
+    #----------------------------------------------------------------#
+    ANCIANOS = 'ANCIANOS'
+    CADETES = 'CADETES'
+    CUADRA_KIDS = 'CUADRA KIDS'
+    DANZA_Y_CORROS_PENIEL = 'DANZA Y CORROS PENIELL'
+    DIACONOS_Y_SERVIDORES = 'DIACONOS Y SERVIDORES'
+    INTERSECION = 'INTERSECION'
+    LIDER_DE_GRUPO_DE_VIDA = 'LIDER DE GRUPO DE VIDA'
+    MAESTROS_DE_DISCIPULADO_GENERAL_Y_MAYOR = 'MAESTROS DE DISCIPULADO GENERAL Y MAYOR'
+    MULTIMEDIA_Y_CAMARAS = 'MULTIMEDIA Y CAMARAS'
+    NO_PERTENEZCO_A_NINGUN_MINISTERIO = 'NO PERTENEZCO A NINGUN MINISTERIO'
+    PENIEL_WORSHIP = 'PENIEL WORSHIP'
+    PRE_ADOLESCENTES = 'PRE-ADOLESCENTES'
+    SUPERVISOR_DE_ZONA = 'SUPERVISOR DE ZONA'
+    GENDER_IN_CHOICES = [
+        (ANCIANOS, 'ANCIANOS'),
+        (CADETES, 'CADETES'),
+        (CUADRA_KIDS, 'CUADRA KIDS'),
+        (DANZA_Y_CORROS_PENIEL, 'DANZA Y CORROS_PENIEL'),
+        (DIACONOS_Y_SERVIDORES, 'DIACONOS Y SERVIDORES'),
+        (INTERSECION, 'INTERSECION'),
+        (LIDER_DE_GRUPO_DE_VIDA, 'LIDER DE GRUPO DE VIDA'),
+        (MAESTROS_DE_DISCIPULADO_GENERAL_Y_MAYOR, 'MAESTROS DE DISCIPULADO GENERAL Y MAYOR'),
+        (MULTIMEDIA_Y_CAMARAS, 'MULTIMEDIA Y CAMARAS'),
+        (NO_PERTENEZCO_A_NINGUN_MINISTERIO, 'NO PERTENEZCO A NINGUN MINISTERIO'),
+        (PENIEL_WORSHIP, 'PENIEL WORSHIP'),
+        (SUPERVISOR_DE_ZONA, 'SUPERVISOR DE ZONA'),
+    ]
+    ministry = models.CharField(max_length=50,choices=GENDER_IN_CHOICES,verbose_name='Ministerio')
+    #----------------------------------------------------------------#
+    state = models.ForeignKey(Estado, verbose_name='Estado', null=True, on_delete=models.PROTECT)
+    image = models.ImageField(upload_to='avatar/',verbose_name='Foto')
+    date_updated = models.DateTimeField(auto_now = True) # Fecha y Hora / Se ira modificando
+    childrenb = models.BooleanField(verbose_name='¿Tiene Hijos?')
+     #----------------------------------------------------------------#
+    PAPA = 'PAPÁ'
+    MAMA = 'MAMÁ'
+    N_A = 'N/A'
+    GENDER_IN_CHOICES = [
+        (PAPA, 'PAPÁ'),
+        (MAMA, 'MAMÁ'),
+        (N_A, 'N/A'),
+    ]
+    familyrol = models.CharField(default='N/A',max_length=10,choices=GENDER_IN_CHOICES,verbose_name='Rol Familiar',null=True,blank=True)
+    #----------------------------------------------------------------#
+    """ childrenmtm = models.ManyToManyField(Hijo,verbose_name='Seleccione sus Hijos',through='HijoPerson',blank=True,) """
+    childrenmtm = models.ManyToManyField(Hijo,verbose_name='Seleccione sus Hijos',null=True,blank=True)
+    
+    #Agregando Propiedades a la Entidad
+    def __str__(self):
+        texto = " {0} ({1})"
+        return texto.format(self.name, self.lastname) # Muestra como se vera el Listado en el Panel de Administracion
+
+    class Meta:
+        verbose_name = 'Persona' # Da el Nombre en el Panel de Administracion
+        verbose_name_plural = 'Personas' # Da el Nombre en el Panel de Administracion
+        db_table = 'tblperson'
+        ordering = ['id']
+
+
+""" Tabla Intermedia
+    class HijoPerson(models.Model):
+    hijo = models.ForeignKey(Hijo, null=True,blank=True, on_delete=models.PROTECT)
+    person = models.ForeignKey(Person, null=True,blank=True, on_delete=models.PROTECT)
+    description = models.CharField(max_length=100,blank=True)
+    
+    def __str__(self):
+        return str(self.id) + '-' + self.hijo.name
+    
+    class Meta:
+        verbose_name = 'HijoPerson' # Da el Nombre en el Panel de Administracion
+        verbose_name_plural = 'HijosPersons' # Da el Nombre en el Panel de Administracion
+        db_table = 'tblhijoperson'
+        ordering = ['id'] 
+        Tabla Intermedia"""
+ {% endcomment %}
+
+
+{% endblock content %} 
+

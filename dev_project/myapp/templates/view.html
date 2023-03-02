@@ -1,0 +1,195 @@
+{% extends "./base.html" %}
+
+{% block title %}Ver Registro Seleccionado{% endblock title %}
+
+
+{% load static %} 
+   
+{% block content %}
+
+<div class="col-md-12">    
+    <br>  
+    <br>  
+    <br>  
+    <div class="container">   
+            <br>  
+        <form action="" method="" class:"post-form">
+            <div class="form-row">
+                <div class="form-group col-md-3">  
+                    <label class="col-sm-0 col-form-label"></label>  
+                    <div class="col-sm-0">  
+                    <h3>Perfil</h3>  
+                    <a href="/myapp/personas/list/">
+                        <img src="{% static 'img/previous.png'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+                        atras
+                    </a>
+                    </div> 
+                </div>
+                     
+                <div class="form-group col-md-8">
+                    <label class="col-sm-0 col-form-label"></label> 
+                </div>
+
+                <div class="form-group col-md-1">
+                    <label class="col-sm-0 col-form-label"></label>  
+                    <div class="col-sm-0">  
+                    <h3>Imprimir</h3>  
+                    <a href="#">
+                        <img src="{% static 'img/printer.png'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+                        Print
+                    </a>
+                    </div> 
+                    
+                </div>
+            </div> 
+                 
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label class="col-sm-0 col-form-label"></label>
+                        </div>
+
+                        <div class="form-group col-md-6">  
+                            <label class="col-sm-2 col-form-label">Foto:</label>  
+                            <div class="col-sm-0">
+                            {% if person.image %}
+                            <img src="{{person.image.url}}"class="img-fluid" widht="300" height="200">
+                            {% endif %}
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label class="col-sm-0 col-form-label"></label>
+                            </div>
+                        </div> 
+                    </div>   
+                    
+                    <div class="form-group row">  
+                        <label class="col-sm-2 col-form-label"># de Miembro:</label>  
+                        <div class="col-sm-1">  
+                            <input type="text" id="id" name="id" value="{{person.id}}" class="form-control" readonly> 
+                        </div>  
+                    </div> 
+
+                <div class="form-row">
+                        <div class="col">  
+                            <label class="col-sm-0 col-form-label">Nombres:</label>  
+                            <input type="text" id="txtName" name="txtName" value="{{person.name}}" class="form-control" placeholder="Nombres"
+                                maxlength="50" required readonly >
+                         </div>  
+
+                        <div class="col">
+                            <label class="col-sm-0 col-form-label">Apellidos:</label>  
+                            <input type="text" id="txtLastname" name="txtLastname" value="{{person.lastname}}" class="form-control" placeholder="Apellidos"
+                                maxlength="50" required readonly>
+                        </div>
+                 </div> 
+                 <br> 
+
+                    <div class="form-row">
+                        <div class="col">  
+                            <label class="col-sm-0 col-form-label">DNI:</label>  
+                            <input type="text" id="txtDni" name="txtDni" value="{{person.dni}}" class="form-control" placeholder="DNI"
+                             maxlength="13" required readonly>
+                        </div>  
+
+                        <div class="col">
+                            <label class="col-sm-0 col-form-label">Celular:</label>  
+                            <input type="text" id="numCelular" name="numCelular" value="{{person.celular}}" class="form-control" maxlength="8"
+                            value="0" readonly>
+                        </div>
+                </div> 
+                <br> 
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">  
+                            <label class="col-sm-0 col-form-label">Fecha de Nacimiento:</label>  
+                            <input type="text" id="fechaNacimiento" name="fechaNacimiento" value="{{person.date_birth}}" class="form-control" readonly>
+                        </div>  
+
+                        <div class="form-group col-md-6">
+                            <label class="col-sm-0 col-form-label">Edad:</label>
+                            <input type="number" id="numEdad" name="numEdad" value="{{person.age}}" class="form-control" placeholder="Solo Numeros" readonly>
+                        </div>
+                </div> 
+                <br> 
+
+                <div class="form-row">  
+                    <div class="form-group col-md-6">   
+                   
+                        <label class="col-sm-0 col-form-label">Direccion:</label>  
+                        <textarea id="textAddress" name="textAddress" class="form-control" maxlength="250" required readonly>{{person.address}}</textarea>
+                    </div>
+                    
+                    <div class="form-group col-md-6">  
+                        <label class="col-sm-0 col-form-label">Genero:</label>  
+                         <input type="text" value="{{person.gender}}" class="form-control" readonly>
+                    </div>
+                    
+                </div> 
+
+                    <div class="form-row">
+                             
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-0 col-form-label">Miembro:</label> 
+                            {% if person.member %}
+                            <input type="text" value="SI" class="form-control" readonly>
+                            {% else %}
+                            <input type="text" value="NO" class="form-control" readonly>
+                            {% endif %} 
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-0 col-form-label">Discipulado:</label> 
+                            {% if person.discipleship %}
+                            <input type="text" value="SI" class="form-control" readonly>
+                            {% else %}
+                            <input type="text" value="NO" class="form-control" readonly>
+                            {% endif %} 
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-0 col-form-label">Estado:</label>  
+                            <input type="text" value="{{person.state}}" class="form-control" readonly>
+                        </div>
+                </div> 
+               
+                
+                <div class="form-row">  
+                    <div class="form-group col-md-6">   
+                   
+                        <label class="col-sm-0 col-form-label">Observacion de Bautismo:</label>  
+                        <textarea id="textAddress" name="textAddress" class="form-control" maxlength="250" required readonly>{{person.observationbap}}</textarea>
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label class="col-sm-0 col-form-label">Bautizado:</label> 
+                        {% if person.baptized %}
+                        <input type="text" value="SI" class="form-control" readonly>
+                        {% else %}
+                        <input type="text" value="NO" class="form-control" readonly>
+                        {% endif %} 
+                    </div>
+                </div> 
+
+            <div class="form-row">  
+                <div class="form-group col-md-6">
+                    <label class="col-sm-0 col-form-label">Hijos:</label> 
+                    {% if person.childrenb %}
+                    <input type="text" value="SI" class="form-control" readonly>
+                    {% else %}
+                    <input type="text" value="NO" class="form-control" readonly>
+                    {% endif %} 
+                </div>
+
+                <div class="form-group col-md-6">   
+               
+                    <label class="col-sm-0 col-form-label">Rol Familiar:</label>  
+                    <input type="text" value="{{person.familyrol}}" class="form-control" readonly>
+                </div>
+            </div> 
+            <br> 
+        </form>
+    </div> 
+</div>  
+
+{% endblock content %} 

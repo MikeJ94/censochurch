@@ -1,0 +1,139 @@
+{% extends "./base.html" %}
+
+{% block title %}Ver Registro Seleccionado{% endblock title %}
+
+
+{% load static %} 
+   
+{% block content %}
+
+<div class="col-md-12">    
+    <br>  
+    <br>  
+    <br>  
+    <div class="container">   
+            <br>  
+        <form action="" method="POST" enctype="multipart/form-data" class:"post-form">{% csrf_token %}
+                
+                    <div class="form-group row">  
+                        <label class="col-sm-0 col-form-label"></label>  
+                        <div class="col-sm-5">  
+                        <h3>Perfil</h3>  
+                        <a href="/myapp/listarPersonas/">
+                            <img src="{% static 'img/previous.png'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+                            atras
+                        </a>
+                        </div>  
+                    </div>  
+
+                    <div class="form-group row">  
+                        <label class="col-sm-2 col-form-label">Fecha de Registro:  
+                        <h6 id="current_date">  
+                            <script>
+                                date = new Date();
+                                year = date.getFullYear();
+                                month = date.getMonth() + 1;
+                                day = date.getDate();
+                                document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+                            </script>  
+                        </h6>  
+                    </label>
+                    </div>  
+
+                    <div class="form-group row">  
+                        <label class="col-sm-2 col-form-label"># de Miembro:</label>  
+                        <div class="col-sm-1">  
+                            <input type="text" id="id" name="id" value="{{person.id}}" class="form-control" readonly> 
+                        </div>  
+                    </div> 
+
+                <div class="form-row">
+                        <div class="col">  
+                            <label class="col-sm-0 col-form-label">Nombres:</label>  
+                            <input type="text" id="txtName" name="txtName" value="{{person.name}}" class="form-control" placeholder="Nombres"
+                                maxlength="50" required autofocus >
+                         </div>  
+
+                        <div class="col">
+                            <label class="col-sm-0 col-form-label">Apellidos:</label>  
+                            <input type="text" id="txtLastname" name="txtLastname" value="{{person.lastname}}" class="form-control" placeholder="Apellidos"
+                                maxlength="50" required>
+                        </div>
+                 </div> 
+                 <br> 
+
+                    <div class="form-row">
+                        <div class="col">  
+                            <label class="col-sm-0 col-form-label">DNI:</label>  
+                            <input type="text" id="txtDni" name="txtDni" value="{{person.dni}}" class="form-control" placeholder="DNI"
+                             maxlength="13" required>
+                        </div>  
+
+                        <div class="col">
+                            <label class="col-sm-0 col-form-label">Celular:</label>  
+                            <input type="text" id="numCelular" name="numCelular" value="{{person.celular}}" class="form-control" maxlength="8"
+                            value="0">
+                        </div>
+                </div> 
+                <br> 
+
+                    <div class="form-row">
+                        <div class="form-group col-md-5">  
+                            <label class="col-sm-0 col-form-label">Fecha de Nacimiento:</label>  
+                            <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="{{person.date_birth}}" class="form-control" 
+                             min="1930-01-01" max="2030-12-31" required>
+                        </div>  
+
+                        <div class="form-group col-md-2" >
+                            <label class="col-sm-0 col-form-label">Edad Calculada:</label>
+                            <h3 id="edad"></h3>
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="col-sm-0 col-form-label">Edad:</label>
+                            <input type="number" id="numEdad" name="numEdad" value="{{person.age}}" class="form-control" placeholder="Solo Numeros">
+                        </div>
+                </div> 
+                <br> 
+
+                <div class="form-group row">  
+                    <label class="col-sm-2 col-form-label">Direccion:</label>  
+                    <div class="col-sm-10">  
+                        <textarea id="textAddress" name="textAddress" class="form-control" maxlength="250" required>{{person.address}}</textarea>
+                    </div>  
+                </div> 
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">  
+                            <label class="col-sm-0 col-form-label">Genero:</label>  
+                            <select id="selectGender" name="selectGender" class="form-control" required>
+                                <option value="{{ person.gender }}"selected>{{ person.gender }}</option>
+                                <option value="MASCULINO">MASCULINO</option>
+                                <option value="FEMENINO">FEMENINO</option>
+                              </select>
+                        </div>
+                             
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-0 col-form-label">Miembro:</label>  
+                            <select id="selectMember" name="selectMember" class="form-control" required>
+                                <option value="{{person.member}}" selected>{{person.member}}</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+                              </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="col-sm-0 col-form-label">Estado:</label>  
+                            <select id="selectState" name="selectState" class="form-control" required>
+                                <option value="{{person.state}}" selected>{{person.state}}</option>
+                                <option value="ACTIVO">ACTIVO</option>
+                                <option value="INACTIVO">INACTIVO</option>
+                              </select>
+                        </div>
+                </div> 
+                <br>     
+        </form>
+    </div> 
+</div>  
+
+{% endblock content %} 

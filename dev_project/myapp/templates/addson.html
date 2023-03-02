@@ -1,0 +1,113 @@
+{% extends "./base.html" %}
+
+{% block title %}Agregar Nuevo Registro | Hijos{% endblock title %}
+
+{% load static %} 
+
+   
+{% block content %}
+
+
+{% load crispy_forms_tags %} 
+
+<div class="col-md-12">    
+    <br>  
+    <br>  
+    <br>  
+
+    <div class="container">   
+        <br>  
+        <form action="" method="POST">{% csrf_token %}
+                
+                    <div class="form-group row">  
+                        <label class="col-sm-0 col-form-label"></label>  
+                        <div class="col-sm-5">  
+                        <h3>Nuevo Registro | Hijos</h3>  
+                        <a href="/myapp/personas/add/">
+                            <img src="{% static 'img/previous.png'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+                            atras
+                          </a>
+                        </div>  
+                    </div>  
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong class="text-dark">{{ message }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <!--Usando Formulario DJANGO-->
+                    {{ form | crispy }}
+                    <!--Usando Formulario DJANGO-->
+
+                    <br>   
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">  
+                            <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                        </div>  
+                        <div class="form-group col-md-6">
+                            <button type="reset" class="btn btn-warning btn-block text-white">Reset</button>
+                        </div>
+                 </div> 
+                
+        </form>
+        <!-- Button trigger modal -->
+        <div class="form-row">
+            <div class="form-group col-md-6">  
+                <button type="button" class="btn btn-primary btn-block " data-toggle="modal" data-target="#exampleModal1">
+                    Calcular Edad
+                </button>
+            </div> 
+
+            <div class="form-group col-md-6">  
+         
+            </div>
+                
+        </div> 
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Calcular Edad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">  
+                            <label class="col-sm-0 col-form-label">Fecha de Nacimiento:</label>  
+                            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" 
+                            min="1930-01-01" max="2030-12-31" required>
+                        </div>  
+
+                        <div class="form-group col-md-2" >
+                            <label class="col-sm-0 col-form-label">Edad Calculada:</label>
+                            <h3 id="edad"></h3>
+                        </div>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div> 
+</div>  
+
+{% endblock content %} 
+
+{% block js %}
+
+<script src="{% static 'js/edad.js'%}"></script>
+
+{% endblock js %} 

@@ -1,0 +1,82 @@
+{% load static %}  
+<!--Menu-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+
+      <div class="container">
+
+         <!--Menu Para Celulares-->
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+         <!--Menu Para Celulares-->
+
+         <!--Logo-->
+          <a class="navbar-brand" href="/myapp/">
+          <img src="{% static 'img/peacemaker.png'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+          CENSO CHURCH
+        </a>
+        <!--Logo-->
+
+             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+               <!--<ul class="navbar-nav me-auto mt-2 mt-lg-0">-->
+                <ul class="navbar-nav ml-auto">
+                   <li class="nav-item active">
+                      <a class="nav-link" href="/myapp/">Home
+                         <span class="visually-hidden"></span>
+                      </a>
+                   </li>
+
+                   <li class="nav-item">
+                    <a class="nav-link" href="/myapp/verdashboard/">Dashboard
+                       <span class="visually-hidden"></span>
+                    </a>
+                 </li>
+
+                  <!--<li class="nav-item">
+                      <a class="nav-link" href="/registrarPersona/">Registro de Miembros</a>
+                   </li>-->
+
+                   <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                       Listados
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="/myapp/personas/list/">Listado de Adultos (Miembros)</a>
+                      <a class="dropdown-item" href="/myapp/sons/list/">Listado de Hijos</a>
+                      <a class="dropdown-item" href="/myapp/listarph/">Listado Relacional Familiar</a>
+                      <a class="dropdown-item" href="/myapp/listarpm/">Listado Relacional Ministerial | Adultos</a>
+                      <a class="dropdown-item" href="/myapp/listarhm/">Listado Relacional Ministerial | Hijos</a>
+                    </div>
+                  </li>
+
+                   <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Registrar
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                       <a class="dropdown-item" href="/myapp/personas/add/">Registro de Adultos (Miembros)</a>
+                       <a class="dropdown-item" href="/myapp/sons/add/">Registro de Hijos</a>
+                       {% comment %} <a class="dropdown-item" href="/myapp/verdashboard/">Dashboard</a> {% endcomment %}
+                     </div>
+                   </li>
+
+               
+                   <li class="nav-item dropdown" id="usernav" name="usernav">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+                      <img src="{% static 'img/user.png'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+                      
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                     <a class="dropdown-item" href="http://192.168.0.25:8080/admin/">Admin Panel (Users)</a> 
+                       <a class="dropdown-item" href="#">Perfil</a>
+                       <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                     </div>
+                   </li>
+               
+                </ul>
+              </div>
+             </div>
+            </div>
+    </nav>
+<!--Menu-->

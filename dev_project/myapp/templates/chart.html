@@ -1,0 +1,410 @@
+{% extends "./base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="container" > 
+<div class="col-md-12">   
+   
+            <br>
+            <br>
+            <br>
+            <br>
+        <div class="row">
+            <div class="form-group row">  
+                <label class="col-sm-0 col-form-label"></label>  
+                <div class="col-sm-5">  
+                    <h3>Dashboard</h3>
+                </div>
+            </div>  
+
+          
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <br>
+                        <br>
+                        <div class="form-group row">  
+                            <label class="col-sm-0 col-form-label"></label>  
+                            <div class="col-sm-5">  
+                                <h4>Adultos</h4>
+                            </div>
+                        </div>  
+
+                        <canvas id="myChart0" width="200" height="100"></canvas>
+                        <script>
+                        var ctx = document.getElementById('myChart0').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [{% for member in member_list %}  '{{ member }}',  {% endfor %}],
+                                datasets: [{
+                                    label: 'Numero de Personas Miembros',
+                                    data: [{% for number in member_number  %}  {{ number }},  {% endfor %}],
+                                    backgroundColor: [
+                                        'rgba(5, 168, 103, 0.8)',
+                                        'rgba(91, 97, 95, 0.8)', 
+                                    ],
+                                    borderColor: [
+                                        'rgba(5, 168, 103, 0.8)',
+                                        'rgba(91, 97, 95, 0.8)', 
+
+                                    ],
+                                    borderWidth: 3
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        </script>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <canvas id="myChart1" width="200" height="100"></canvas>
+                        <script>
+                        var ctx = document.getElementById('myChart1').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: [{% for gender in gender_list %}  '{{ gender }}',  {% endfor %}],
+                                datasets: [{
+                                    label: 'Numero de Miembros por Genero',
+                                    data: [{% for number in gender_number  %}  {{ number }},  {% endfor %}],
+                                    backgroundColor: [
+                                        'rgba(54, 162, 235, 0.8)',
+                                        'rgba(255, 99, 132, 0.8)',
+                                    ],
+                                    borderColor: [
+                                    'rgba(54, 162, 235, 0.8)',
+                                    'rgba(255, 99, 132, 0.8)',
+
+                                    ],
+                                    borderWidth: 3
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+                <br>
+                <br>  
+                
+                <div class="form-group col-md-6">
+                        <canvas id="myChart3" width="200" height="100"></canvas>
+                        <script>
+                        var ctx = document.getElementById('myChart3').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [{% for discipleship in discipulados_list %}  '{{ discipleship }}',  {% endfor %}],
+                                datasets: [{
+                                    label: 'Numero de Personas Discipuladas',
+                                    data: [{% for number in discipulados_number  %}  {{ number }},  {% endfor %}],
+                                    backgroundColor: [
+                                        'rgba(5, 168, 103, 0.8)',
+                                        'rgba(91, 97, 95, 0.8)', 
+                                    ],
+                                    borderColor: [
+                                        'rgba(5, 168, 103, 0.8)',
+                                        'rgba(91, 97, 95, 0.8)', 
+
+                                    ],
+                                    borderWidth: 3
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        </script>
+                     </div>
+                     <br>
+                     <br> 
+                     
+                <div class="form-group col-md-6">
+              
+                    <canvas id="myChart4" width="200" height="100"></canvas>
+                        <script>
+                        var ctx = document.getElementById('myChart4').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [{% for baptized in bautizados_list %}  '{{ baptized }}',  {% endfor %}],
+                                datasets: [{
+                                    label: 'Numero de Personas Bautizadas',
+                                    data: [{% for number in bautizados_number  %}  {{ number }},  {% endfor %}],
+                                    backgroundColor: [
+                                    'rgba(5, 168, 103, 0.8)',
+                                    'rgba(91, 97, 95, 0.8)', 
+                                    
+                                    ],
+                                    borderColor: [
+                                    'rgba(5, 168, 103, 0.8)',
+                                    'rgba(91, 97, 95, 0.8)', 
+                                    
+
+                                    ],
+                                    borderWidth: 3
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+                <br>
+
+                <div class="form-group col-md-6">
+                    <br>
+                    <br>
+                    <canvas id="myChart5" width="200" height="100"></canvas>
+                    <script>
+                    var ctx = document.getElementById('myChart5').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: [{% for familyrol in rol_list %}  '{{ familyrol }}',  {% endfor %}],
+                            datasets: [{
+                                label: 'Numero de Personas Discipuladas',
+                                data: [{% for number in rol_number  %}  {{ number }},  {% endfor %}],
+                                backgroundColor: [
+                                    'rgba(11, 68, 66, 0.8)',
+                                    'rgba(27, 171, 167, 0.8)', 
+                                    'rgba(27, 101, 171, 0.8)', 
+                                ],
+                                borderColor: [
+                                    'rgba(11, 68, 66, 0.8)',
+                                    'rgba(27, 171, 167, 0.8)', 
+                                    'rgba(27, 101, 171, 0.8)',
+
+                                ],
+                                borderWidth: 3
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    </script>
+                 </div>
+                 <br>
+                 <br> 
+                 
+                 
+            <div class="form-group col-md-6">
+          
+                <canvas id="myChart6" width="200" height="100"></canvas>
+                <script>
+                var ctx = document.getElementById('myChart6').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: [{% for ministry in personm_list %}  '{{ ministry }}',  {% endfor %}],
+                        datasets: [{
+                            label: 'Numero de Hijos por Ministerio',
+                            data: [{% for number in personm_number  %}  {{ number }},  {% endfor %}],
+                            backgroundColor: [
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 99, 132, 0.8)',
+                                'rgba(123, 30, 78, 0.8)',
+                                'rgba(60, 30, 123, 0.8)',
+                                'rgba(102, 60, 38, 0.8)',
+                                'rgba(54, 106, 131, 0.8)',
+                                'rgba(93, 131, 54, 0.8)',
+                                'rgba(132, 235, 25, 0.8)',
+                                'rgba(138, 144, 153, 0.8)',
+                                'rgba(211, 4, 19, 0.8)',
+                                'rgba(199, 8, 165, 0.97)',
+                                'rgba(87, 17, 19, 0.97)',
+                                'rgba(238, 236, 24, 0.69)',
+                            ],
+                            borderColor: [
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(123, 30, 78, 0.8)',
+                            'rgba(60, 30, 123, 0.8)',
+                            'rgba(102, 60, 38, 0.8)',
+                            'rgba(54, 106, 131, 0.8)',
+                            'rgba(93, 131, 54, 0.8)',
+                            'rgba(132, 235, 25, 0.8)',
+                            'rgba(138, 144, 153, 0.8)',
+                            'rgba(215, 4, 19, 0.8)',
+                            'rgba(199, 8, 165, 0.97)',
+                            'rgba(87, 17, 19, 0.97)',
+                            'rgba(238, 236, 24, 0.69)',
+
+                            ],
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
+        </div>
+            </div>
+            <br>
+
+            <div class="form-group col-md-6">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="form-group row">  
+                    <label class="col-sm-0 col-form-label"></label>  
+                    <div class="col-sm-5">  
+                        <h4>Hijos</h4>
+                    </div>
+                </div>  
+
+                <canvas id="myChart7" width="200" height="100"></canvas>
+                <script>
+                var ctx = document.getElementById('myChart7').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [{% for baptized in hijo_list %}  '{{ baptized }}',  {% endfor %}],
+                        datasets: [{
+                            label: 'Numero de Hijos Bautizados',
+                            data: [{% for number in hijo_number  %}  {{ number }},  {% endfor %}],
+                            backgroundColor: [
+                                'rgba(5, 168, 103, 0.8)',
+                                'rgba(91, 97, 95, 0.8)', 
+                            ],
+                            borderColor: [
+                                'rgba(5, 168, 103, 0.8)',
+                                'rgba(91, 97, 95, 0.8)', 
+
+                            ],
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+                </script>
+            </div>
+
+            <div class="form-group col-md-6">
+                <br>
+                <br>
+                <br>
+                <canvas id="myChart8" width="200" height="100"></canvas>
+                    <script>
+                    var ctx = document.getElementById('myChart8').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: [{% for ministry in hijom_list %}  '{{ ministry }}',  {% endfor %}],
+                            datasets: [{
+                                label: 'Numero de Hijos por Ministerio',
+                                data: [{% for number in hijom_number  %}  {{ number }},  {% endfor %}],
+                                backgroundColor: [
+                                    'rgba(54, 162, 235, 0.8)',
+                                    'rgba(255, 99, 132, 0.8)',
+                                    'rgba(123, 30, 78, 0.8)',
+                                    'rgba(60, 30, 123, 0.8)',
+                                    'rgba(102, 60, 38, 0.8)',
+                                    'rgba(54, 106, 131, 0.8)',
+                                    'rgba(93, 131, 54, 0.8)',
+                                    'rgba(132, 235, 25, 0.8)',
+                                    'rgba(138, 144, 153, 0.8)',
+                                    'rgba(211, 4, 19, 0.8)',
+                                    'rgba(199, 8, 165, 0.97)',
+                                    'rgba(87, 17, 19, 0.97)',
+                                    'rgba(238, 236, 24, 0.69)',
+                                ],
+                                borderColor: [
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 99, 132, 0.8)',
+                                'rgba(123, 30, 78, 0.8)',
+                                'rgba(60, 30, 123, 0.8)',
+                                'rgba(102, 60, 38, 0.8)',
+                                'rgba(54, 106, 131, 0.8)',
+                                'rgba(93, 131, 54, 0.8)',
+                                'rgba(132, 235, 25, 0.8)',
+                                'rgba(138, 144, 153, 0.8)',
+                                'rgba(215, 4, 19, 0.8)',
+                                'rgba(199, 8, 165, 0.97)',
+                                'rgba(87, 17, 19, 0.97)',
+                                'rgba(238, 236, 24, 0.69)',
+
+                                ],
+                                borderWidth: 3
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock content %}

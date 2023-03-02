@@ -1,0 +1,153 @@
+{% extends "./base.html" %}
+
+{% block title %}Agregar Nuevo Registro{% endblock title %}
+
+{% load static %} 
+
+{% block head %}
+
+<!-- Estilos Especificos para el Select2-->
+<link href="{% static 'libs/select2-4.0.13/css/select2.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'libs/select2-4.0.13/css/select2-bootstrap4.min.css' %}" rel="stylesheet"/>
+<script src="{% static 'libs/select2-4.0.13/js/select2.min.js' %}"></script>
+<script src="{% static 'libs/select2-4.0.13/js/i18n/es.js' %}"></script> 
+
+<script src="{% static 'js/form.js' %}"></script>
+
+{% endblock head %}
+
+{% block content %}
+
+{% load crispy_forms_tags %} 
+
+<div class="col-md-12">    
+    <br>  
+    <br>  
+    <br>  
+    <div class="container">   
+        <br>  
+        <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
+
+            <input type="hidden" name="action" value="{{ action }}">
+                
+                    <div class="form-group row">  
+                        <label class="col-sm-0 col-form-label"></label>  
+                        <div class="col-sm-5">  
+                        <h3>Nuevo Registro | Adultos</h3>  
+                        <a href="/myapp/personas/list/">
+                            <img src="{% static 'img/previous.png'%}" width="30" height="30" class="d-inline-block align-top" alt="">
+                            atras
+                        </a>
+                        </div>  
+                    </div>  
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong class="text-dark">{{ message }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <!--Usando Formulario DJANGO-->
+                    {{ form | crispy }}
+                    <!--Usando Formulario DJANGO-->
+                    <br>   
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">  
+                            <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                        </div>  
+                        <div class="form-group col-md-6">
+                            <button type="reset" class="btn btn-warning btn-block text-white">Reset</button>
+                        </div>
+                 </div> 
+        </form>
+
+         <!-- Button trigger modal -->
+         <div class="form-row">
+            <div class="form-group col-md-6">  
+                <button type="button" class="btn btn-primary btn-block " data-toggle="modal" data-target="#exampleModal1">
+                    Calcular Edad
+                </button>
+            </div> 
+
+            <div class="form-group col-md-6">  
+               <a href="/myapp/registrarHijo/" class="btn btn-secondary btn-block">Agregar Hijo Nuevo</a> 
+            </div>
+        </div> 
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Calcular Edad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">  
+                            <label class="col-sm-0 col-form-label">Fecha de Nacimiento:</label>  
+                            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" 
+                            min="1930-01-01" max="2030-12-31" required>
+                        </div>  
+
+                        <div class="form-group col-md-2" >
+                            <label class="col-sm-0 col-form-label">Edad Calculada:</label>
+                            <h3 id="edad"></h3>
+                        </div>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+    </div> 
+</div>  
+
+{% endblock content %} 
+
+{% block js %}
+<script src="{% static 'js/edad.js'%}"></script>
+
+<script>
+
+    {% if form.errors %}
+            var errors = '';
+            {% for field in form %}
+                {% for error in field.errors %}
+                    errors += '{{ error }}\n';
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                errors += '{{ error }}\n';
+            {% endfor %}
+            Swal.fire({
+                title: 'Error!',
+                text: errors,
+                icon: 'error'
+            });
+    {% endif %}
+
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        var parameters = new FormData(this);
+        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
+            location.href = '{{ list_url }}';
+        });
+    });
+
+</script>
+
+
+   
+{% endblock js %} 
+

@@ -1,0 +1,71 @@
+{% extends "./base.html" %}
+
+
+
+{% block title %}Listado de Hijos{% endblock title %}
+
+{% load static %}  
+  
+{% block content %}
+
+<div class="container-fluid" > 
+
+ <div class="col-md-12">
+        <br>
+        <br>
+        <br>
+        <br>
+        <h3>Listado de Hijos</h3>  
+        <br>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ message }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="table-responsive">
+        <table id="bootstrapdatatable" class="table table-sm table-hover table-striped table-bordered" width="100%">
+        <thead class="thead-dark">
+        <tr>  
+            
+            <th>ID</th>
+            <th>Nombres</th>
+            <th>Edad</th>
+            <th>¿Bautizado?</th>
+            <th>Observacion</th>
+            <th>Ultima Modificacion</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for son in sons %}  
+      
+            <tr>  
+            
+            <td>{{ son.id }}</td>  
+            <td>{{ son.name }}</td>  
+            <td>{{ son.age }}</td> 
+            <td>
+                {% if son.baptized %}
+                SI
+                {% else %}  
+                NO
+                {% endif %}
+            </td>
+            <td>{{ son.observationbap }}</td> 
+            <td>{{ son.date_updated }}</td>
+            <td><a href="{% url 'myapp:edit-son' son.id %}" class="btn btn-warning">Editar</a></td> 
+             </tr>   
+        {% endfor %} 
+
+        </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
